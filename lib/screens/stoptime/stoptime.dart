@@ -1,36 +1,37 @@
-import 'package:app2/screens/stoptime/stoptiecontroller.dart';
+import 'package:app2/screens/stoptime/stoptimecontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class StopTime extends StatelessWidget {
-  StopTimeController stopTimeControler = StopTimeController();
+  StopTimeController stopTimeController = StopTimeController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Stop Time"),
+    return GetBuilder(
+      init: StopTimeController(),
+      builder: (StopTimeController controller) => Scaffold(
+        appBar: AppBar(
+          title: Text("Stop Time"),
+        ),
+        floatingActionButton: _floatingActionButton(controller),
+        body: _body(controller),
       ),
-      floatingActionButton: _floatingActionButton(),
-      body: _body(),
     );
   }
 
-  Widget _floatingActionButton() {
+  Widget _floatingActionButton(StopTimeController controller) {
     return FloatingActionButton(
       onPressed: () {
-        stopTimeControler.stop();
+        stopTimeController.stop();
       },
       child: Icon(Icons.timer),
     );
   }
 
-  Widget _body() {
-    return Obx(
-      () => ListView(
-        children: [
-          stopTimeControler._timeList,
-        ],
-      ),
+  Widget _body(StopTimeController controller) {
+    return ListView(
+      children: [
+        controller.timeList,
+      ],
     );
   }
 }
