@@ -1,53 +1,38 @@
+import 'package:app2/screens/homepagecontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
-  final TextEditingController _textFieldController = TextEditingController();
-  final HomeController homeController = HomeController();
-  // String value = "initial";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Color Swapper"),
+        title: Text("Using SharedPreferences"),
       ),
       body: GetBuilder(
-        init: HomeController(),
-        builder: (HomeController homeController) => Column(
+        init: HomePageController(),
+        builder: (HomePageController homePageController) => Column(
           children: [
             TextField(
-              onChanged: (value) {
-                homeController.updateValue(value);
-              },
-              controller: _textFieldController,
+              controller: homePageController.textFieldController,
             ),
-            RaisedButton(
+            FlatButton(
               onPressed: () {
-                // print(_textFieldController.text);
-                homeController.updateValue(_textFieldController.text);
+                homePageController.save();
               },
+              child: Text("Save"),
               color: Colors.green,
-              child: Text("Display", style: TextStyle(color: Colors.amber)),
             ),
-            Text(homeController.inputText)
-            // Obx(() => Text(homeController.inputText))
+            FlatButton(
+              onPressed: () {
+                homePageController.load();
+              },
+              child: Text("Load"),
+              color: Colors.red,
+            )
           ],
         ),
       ),
     );
-  }
-}
-
-class HomeController extends GetxController {
-  // RxString _inputText = 'Initial'.obs;
-  // String get inputText => _inputText.value;
-  // updateValue(String str) {
-  //   _inputText.value = str;
-  // }
-
-  String _inputText = 'Initial';
-  String get inputText => _inputText;
-  updateValue(String str) {
-    _inputText = str;
   }
 }
