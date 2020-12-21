@@ -1,4 +1,4 @@
-import 'package:app2/screens/homepagecontroller.dart';
+import 'package:app2/screens/homepage/homepagecontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
